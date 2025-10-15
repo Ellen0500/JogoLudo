@@ -1,0 +1,1 @@
+export type PawnColor = 'red' | 'green' | 'blue' | 'yellow';

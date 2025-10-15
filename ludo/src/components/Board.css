@@ -1,0 +1,102 @@
+.board {
+  display: grid;
+  grid-template-columns: repeat(15, 40px);
+  grid-template-rows: repeat(15, 40px);
+  gap: 1px;
+  background-color: #eee;
+  margin: 20px auto;
+  width: fit-content;
+}
+
+.cell {
+  position: relative;
+  width: 40px;
+  height: 40px;
+  background-color: #eee;
+  border: 1px solid #ccc;
+}
+
+/* Áreas fixas */
+.red {
+  background-color: #F20519;
+}
+
+.green {
+  background-color: #03A61C;
+}
+
+.blue {
+  background-color: #0F88F2;
+}
+
+.yellow {
+  background-color: #ffff66;
+}
+
+.white {
+  background-color: white;
+}
+
+.cell {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Triângulo genérico */
+.triangle::before {
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+/* Direções */
+.triangle.top-left::before {
+  clip-path: polygon(0 0, 100% 0, 0 100%);
+}
+.triangle.top::before {
+  clip-path: polygon(0 0, 100% 0, 50% 100%);
+}
+.triangle.top-right::before {
+  clip-path: polygon(100% 0, 100% 100%, 0 0);
+}
+.triangle.left::before {
+  clip-path: polygon(0 0, 0 100%, 100% 50%);
+}
+.triangle.center::before {
+  background-color: white;
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%);
+}
+.triangle.right::before {
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+.triangle.bottom-left::before {
+  clip-path: polygon(0 100%, 0 0, 100% 100%);
+}
+.triangle.bottom::before {
+  clip-path: polygon(0 100%, 100% 100%, 50% 0);
+}
+.triangle.bottom-right::before {
+  clip-path: polygon(100% 100%, 0 100%, 100% 0);
+}
+
+/* Cores */
+.triangle.red::before {
+  background-color: red;
+}
+.triangle.green::before {
+  background-color: green;
+}
+.triangle.yellow::before {
+  background-color: yellow;
+}
+.triangle.blue::before {
+  background-color: blue;
+}
+
+.trophy-icon {
+  width: 10%;
+  height: 10%;
+  object-fit: contain;
+  pointer-events: none;
+}
