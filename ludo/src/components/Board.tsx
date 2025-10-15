@@ -14,6 +14,7 @@ const Board: React.FC = () => {
     rollDice,
     movePiece,
     resetGame,
+    resetDice, // ✅ usamos apenas esta função
   } = useLudoGame();
 
   const cells = Array.from({ length: 225 }, (_, i) => i); // 15x15
@@ -67,13 +68,27 @@ const Board: React.FC = () => {
   return (
     <>
       <div className="controls">
-        <button onClick={rollDice} disabled={state !== 'DICE_NOT_ROLLED'}>
-          🎲 Jogar Dado
-        </button>
-        <button onClick={resetGame}>🔄 Reiniciar</button>
-        <p>Valor do dado: {diceValue ?? '-'}</p>
-        <p>Turno: {['Vermelho', 'Verde', 'Azul', 'Amarelo'][turn]}</p>
-      </div>
+  <div className="left-controls">
+    <button onClick={resetGame} className="reset-button">
+      🧹 Reiniciar Jogo
+    </button>
+  </div>
+
+  <div className="center-info">
+    <button onClick={rollDice} disabled={state !== 'DICE_NOT_ROLLED'}>
+      🎲 Jogar Dado
+    </button>
+    <p>Valor do dado: {diceValue ?? '-'}</p>
+    <p>Turno: {['Vermelho', 'Verde', 'Azul', 'Amarelo'][turn]}</p>
+  </div>
+
+  <div className="right-controls">
+    <button onClick={resetDice} className="reset-button">
+      🔄 Limpar Dado
+    </button>
+  </div>
+</div>
+
 
       <div className="board">
         {cells.map((_, index) => (

@@ -17,18 +17,18 @@ export const BASE_POSITIONS: Record<string, number[]> = {
 
 // Posição de entrada no tabuleiro (quando sai da base com dado 6)
 export const START_POSITIONS: Record<string, number> = {
-  P1: 106, // faixa vermelha
-  P2: 22,  // faixa verde
-  P3: 142, // faixa azul
-  P4: 114, // faixa amarela
+  P1: 91, // faixa vermelha
+  P2: 23,  // faixa verde
+  P3: 201, // faixa azul
+  P4: 133, // faixa amarela
 };
 
 // Posição final (meta de cada jogador)
 export const HOME_POSITIONS: Record<string, number> = {
-  P1: 110,
-  P2: 82,
-  P3: 202,
-  P4: 118,
+  P1: 111,
+  P2: 97,
+  P3: 127,
+  P4: 113,
 };
 
 // Posições seguras (não pode ser capturado)
@@ -37,9 +37,9 @@ export const SAFE_POSITIONS = [106, 22, 142, 114];
 // Ponto de virada para entrar na reta final
 export const TURNING_POINTS: Record<string, number> = {
   P1: 105,
-  P2: 21,
-  P3: 141,
-  P4: 113,
+  P2: 7,
+  P3: 217,
+  P4: 119,
 };
 
 // Casas internas da reta final (caminho até a meta)

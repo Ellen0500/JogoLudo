@@ -1,4 +1,4 @@
-import { getIncrementedPosition } from './movement';
+import { getIncrementedPosition, MAIN_PATH } from './movement';
 import { useState } from 'react';
 import {
   BASE_POSITIONS,
@@ -6,6 +6,8 @@ import {
   HOME_POSITIONS,
   STATE,
   PLAYERS,
+  TURNING_POINTS,
+  HOME_ENTRANCE,
 } from './constants';
 
 export const useLudoGame = () => {
@@ -29,6 +31,7 @@ export const useLudoGame = () => {
       if (diceValue === 6) {
         updatePosition(player, piece, START_POSITIONS[player]);
         setState(STATE.DICE_NOT_ROLLED);
+        setDiceValue(null);
       }
       return;
     }
@@ -69,6 +72,11 @@ export const useLudoGame = () => {
     setState(STATE.DICE_NOT_ROLLED);
   };
 
+  const resetDice = () => {
+    setDiceValue(null);
+    setState(STATE.DICE_NOT_ROLLED);
+  };
+
   return {
     positions,
     turn,
@@ -77,5 +85,6 @@ export const useLudoGame = () => {
     rollDice,
     movePiece,
     resetGame,
+    resetDice,
   };
 };

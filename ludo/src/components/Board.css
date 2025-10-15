@@ -100,3 +100,39 @@
   object-fit: contain;
   pointer-events: none;
 }
+
+.controls {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px;
+  background-color: #f9f9f9;
+  border-bottom: 1px solid #ccc;
+}
+
+.left-controls,
+.right-controls {
+  flex: 1;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.right-controls {
+  justify-content: flex-end;
+}
+
+.center-info {
+  flex: 2;
+  text-align: center;
+}
+
+.reset-button {
+  background-color: #1976d2;
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: bold;
+  margin: 0 8px;
+}
