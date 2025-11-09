@@ -1,0 +1,51 @@
+.player-profile {
+  display: flex;
+  align-items: left;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px;
+  max-width: 280px;
+}
+
+/* Cores de destaque */
+.player-profile.red {
+  border-left: 6px solid #e53935;
+}
+.player-profile.green {
+  border-left: 6px solid #43a047;
+}
+.player-profile.yellow {
+  border-left: 6px solid #fdd835;
+}
+.player-profile.blue {
+  border-left: 6px solid #1e88e5;
+}
+
+.avatar {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 2px solid #ccc;
+}
+
+.player-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.player-name {
+  font-weight: 600;
+  font-size: 1rem;
+  margin: 0;
+}
+
+.active-indicator {
+  font-size: 0.85rem;
+  color: #e53935;
+  font-weight: bold;
+  margin-top: 4px;
+}

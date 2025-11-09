@@ -5,7 +5,10 @@
   margin: auto;
   margin-top: 5px;
   box-shadow: 0 0 3px #333;
+  position: relative; /* necessário para z-index funcionar */
+  z-index: 2; /* peão fica acima */
 }
+
 
 .red {
   background-color: #F20519;
@@ -22,3 +25,26 @@
 .yellow {
   background-color: #ffff66;
 }
+
+.pawn {
+  width: 30px;
+  height: 30px;
+  border-radius: 50%;
+  margin: auto;
+  margin-top: 5px;
+  box-shadow: 0 0 3px #333;
+  position: relative;
+  z-index: 2;
+  cursor: pointer;
+}
+
+.pawn.small {
+  width: 18px;
+  height: 18px;
+  position: absolute;
+}
+
+.pawn-0 { top: 2px; left: 2px; }
+.pawn-1 { top: 2px; right: 2px; }
+.pawn-2 { bottom: 2px; left: 2px; }
+.pawn-3 { bottom: 2px; right: 2px; }

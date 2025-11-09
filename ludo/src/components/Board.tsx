@@ -2,10 +2,35 @@ import React from 'react';
 import './Board.css';
 import Pawn from './Pawn';
 import { useLudoGame } from '../game/useLudoGame';
-import { PLAYERS } from '../game/constants';
+import { SAFE_POSITIONS } from '../game/constants';
 import type { PawnColor } from '../game/types';
 
-const Board: React.FC = () => {
+import estrela from '../assets/estrela.png';
+import trofeu from '../assets/trofeu.png';
+import setaVermelha from '../assets/setaVermelha.png';
+import setaAzul from '../assets/setaAzul.png';
+import setaAmarela from '../assets/setaAmarela.png';
+import setaVerde from '../assets/setaVerde.png';
+import meioVermelhoVerde from '../assets/meioVermelhoVerde.png';
+import meioVermelhoAzul from '../assets/meioVermelhoAzul.png';
+import meioVerdeAmarelo from '../assets/meioVerdeAmarelo.png';
+import meioAzulAmarelo from '../assets/meioAzulAmarelo.png';
+
+import PlayerProfile from './PlayerProfile';
+
+const PLAYER_COLORS: Record<string, string> = {
+  P1: 'Vermelho',
+  P2: 'Verde',
+  P3: 'Azul',
+  P4: 'Amarelo',
+};
+
+interface BoardProps {
+  activePlayers: string[];
+  onRestart: () => void;
+}
+
+const Board: React.FC<BoardProps> = ({ activePlayers, onRestart }) => {
   const {
     positions,
     turn,
@@ -14,13 +39,13 @@ const Board: React.FC = () => {
     rollDice,
     movePiece,
     resetGame,
-    resetDice, // ✅ usamos apenas esta função
-  } = useLudoGame();
+    resetDice,
+  } = useLudoGame(activePlayers);
 
   const cells = Array.from({ length: 225 }, (_, i) => i); // 15x15
 
   const handlePieceClick = (playerId: string, pieceId: number) => {
-    if (PLAYERS[turn] !== playerId || state !== 'DICE_ROLLED') return;
+    if (activePlayers[turn] !== playerId || state !== 'DICE_ROLLED') return;
     movePiece(playerId, pieceId);
   };
 
@@ -47,10 +72,10 @@ const Board: React.FC = () => {
     if (index >= 135 && index < 225 && index % 15 < 6) return 'blue';
     if ((index >= 220 && index < 225) || (index >= 135 && index < 225 && index % 15 > 8)) return 'yellow';
 
-    if ([106, 107, 108, 109, 110].includes(index)) return 'red';
-    if ([22, 37, 52, 67, 82].includes(index)) return 'green';
-    if ([142, 157, 172, 187, 202].includes(index)) return 'blue';
-    if ([114, 115, 116, 117, 118].includes(index)) return 'yellow';
+    if ([106, 107, 108, 109, 110, 111].includes(index)) return 'red';
+    if ([22, 37, 52, 67, 82, 97].includes(index)) return 'green';
+    if ([142, 157, 172, 187, 202, 127].includes(index)) return 'blue';
+    if ([114, 115, 116, 117, 118, 113].includes(index)) return 'yellow';
 
     return '';
   };
@@ -61,58 +86,85 @@ const Board: React.FC = () => {
       case 'P2': return 'green';
       case 'P3': return 'blue';
       case 'P4': return 'yellow';
-      default: return 'red'; // fallback seguro
+      default: return 'red';
     }
   };
 
   return (
-    <>
-      <div className="controls">
-  <div className="left-controls">
-    <button onClick={resetGame} className="reset-button">
-      🧹 Reiniciar Jogo
-    </button>
-  </div>
-
-  <div className="center-info">
-    <button onClick={rollDice} disabled={state !== 'DICE_NOT_ROLLED'}>
-      🎲 Jogar Dado
-    </button>
-    <p>Valor do dado: {diceValue ?? '-'}</p>
-    <p>Turno: {['Vermelho', 'Verde', 'Azul', 'Amarelo'][turn]}</p>
-  </div>
-
-  <div className="right-controls">
-    <button onClick={resetDice} className="reset-button">
-      🔄 Limpar Dado
-    </button>
-  </div>
-</div>
-
-
-      <div className="board">
-        {cells.map((_, index) => (
-          <div key={index} className={`cell ${getCellClass(index)}`}>
-            {index === 112 && (
-              <img src="ludo/trofeu.png" alt="Troféu" className="trophy-icon" />
-            )}
-            {PLAYERS.map(player =>
-              positions[player].map((pos, pieceId) =>
-                pos === index ? (
-                  <Pawn
-                    key={`${player}-${pieceId}`}
-                    color={playerColor(player)}
-                    playerId={player}
-                    pieceId={pieceId}
-                    onClick={handlePieceClick}
-                  />
-                ) : null
-              )
-            )}
-          </div>
-        ))}
+    <div className="board-layout">
+      {/* Perfis nos cantos */}
+      <div className="player-top-left">
+        <PlayerProfile color="red" name="Vermelho" isActive={activePlayers[turn] === 'P1'} />
       </div>
-    </>
+      <div className="player-top-right">
+        <PlayerProfile color="green" name="Verde" isActive={activePlayers[turn] === 'P2'} />
+      </div>
+      <div className="player-bottom-right">
+        <PlayerProfile color="yellow" name="Amarelo" isActive={activePlayers[turn] === 'P4'} />
+      </div>
+      <div className="player-bottom-left">
+        <PlayerProfile color="blue" name="Azul" isActive={activePlayers[turn] === 'P3'} />
+      </div>
+
+      <div className="board-content">
+        <div className="controls">
+          <div className="left-controls">
+            <button onClick={onRestart} className="reset-button">🧹 Reiniciar Jogo</button>
+          </div>
+          <div className="center-info">
+            <button onClick={rollDice} disabled={state !== 'DICE_NOT_ROLLED'}>🎲 Jogar Dado</button>
+            <p>Valor do dado: {diceValue ?? '-'}</p>
+            <p>Turno: {PLAYER_COLORS[activePlayers[turn]]}</p>
+          </div>
+          <div className="right-controls">
+            <button onClick={resetDice} className="reset-button">🔄 Limpar Dado</button>
+          </div>
+        </div>
+
+        <div className="board">
+          {cells.map((_, index) => (
+            <div key={index} className={`cell ${getCellClass(index)}`}>
+              {/* Ícones */}
+              {index === 112 && <img src={trofeu} alt="Troféu" className="trophy-icon" />}
+              {index === 105 && <img src={setaVermelha} alt="Seta vermelha" className="arrow-icon" />}
+              {index === 7 && <img src={setaVerde} alt="Seta verde" className="arrow-icon" />}
+              {index === 119 && <img src={setaAmarela} alt="Seta amarela" className="arrow-icon" />}
+              {index === 217 && <img src={setaAzul} alt="Seta azul" className="arrow-icon" />}
+              {index === 96 && <img src={meioVermelhoVerde} alt="meio vermelho verde" className="triangulo" />}
+              {index === 126 && <img src={meioVermelhoAzul} alt="meio vermelho azul" className="triangulo" />}
+              {index === 98 && <img src={meioVerdeAmarelo} alt="meio verde amarelo" className="triangulo" />}
+              {index === 128 && <img src={meioAzulAmarelo} alt="meio azul amarelo" className="triangulo" />}
+              {SAFE_POSITIONS.includes(index) && <img src={estrela} alt="Casa segura" className="safe-icon" />}
+
+              {/* Peças */}
+              {activePlayers.flatMap(player =>
+                positions[player]
+                  .map((pos, pieceId) =>
+                    pos === index
+                      ? {
+                          key: `${player}-${pieceId}`,
+                          player,
+                          pieceId,
+                          color: playerColor(player),
+                        }
+                      : null
+                  )
+                  .filter(Boolean)
+              ).map((pawnData, i, allPawns) => (
+                <Pawn
+                  key={pawnData!.key}
+                  color={pawnData!.color}
+                  playerId={pawnData!.player}
+                  pieceId={pawnData!.pieceId}
+                  onClick={handlePieceClick}
+                  className={`pawn ${pawnData!.color} ${allPawns.length > 1 ? `small pawn-${i}` : ''}`}
+                />
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
   );
 };
 

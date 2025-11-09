@@ -1,0 +1,62 @@
+.start-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f0f0f0;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+.start-screen {
+  background-color: #e9cfad;
+  padding: 40px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  max-width: 500px;
+  width: 100%;
+  text-align: center;
+}
+
+.section {
+  margin-bottom: 20px;
+}
+
+.player-buttons button,
+.color-box {
+  margin: 5px;
+  padding: 10px 15px;
+  cursor: pointer;
+}
+
+.active {
+  background-color: green;
+  color: white;
+}
+
+.color-box {
+  display: inline-block;
+  border: 1px solid green;
+  border-radius: 5px;
+}
+
+.color-box.selected {
+  background-color: green;
+  color: white;
+}
+
+.start-button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-weight: bold;
+}
+
+.board-preview {
+  margin-top: 30px;
+}
+
+.board-image {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
