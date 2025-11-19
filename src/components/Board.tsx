@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { type ReactElement } from 'react';
 import './Board.css';
 import Pawn from './Pawn';
 import PlayerProfile from './PlayerProfile';
 import { useLudoGame } from '../game/useLudoGame';
 import { SAFE_POSITIONS } from '../game/constants';
 import type { PawnColor } from '../game/types';
+import type { Player } from '../game/types';
 
 import estrela from '../assets/estrela.png';
 import trofeu from '../assets/trofeu.png';
@@ -25,9 +26,10 @@ const PLAYER_COLORS: Record<string, string> = {
 };
 
 interface BoardProps {
-  activePlayers: string[];
+  activePlayers: Player[];
   onRestart: () => void;
 }
+
 
 const Board: React.FC<BoardProps> = ({ activePlayers, onRestart }) => {
   const {
@@ -89,7 +91,7 @@ const Board: React.FC<BoardProps> = ({ activePlayers, onRestart }) => {
   };
 
   const renderIcons = (index: number) => {
-  const icons: Record<number, JSX.Element> = {
+  const icons: Record<number, ReactElement> = {
     112: <img src={trofeu} alt="Troféu" className="icon trophy-icon" />,
     105: <img src={setaVermelha} alt="Seta vermelha" className="icon arrow-icon" />,
     7: <img src={setaVerde} alt="Seta verde" className="icon arrow-icon" />,

@@ -6,12 +6,6 @@ export type Player = 'P1' | 'P2' | 'P3' | 'P4';
 // Lista de jogadores (ordem do turno — mantenha a que preferir)
 export const PLAYERS: Player[] = ['P1', 'P2', 'P4', 'P3'];
 
-// Estados possíveis do jogo
-export const STATE = {
-  DICE_NOT_ROLLED: 'DICE_NOT_ROLLED',
-  DICE_ROLLED: 'DICE_ROLLED',
-} as const;
-
 // Posições iniciais (casas da base de cada jogador)
 export const BASE_POSITIONS: Record<Player, number[]> = {
   P1: [32, 33, 47, 48],       // Vermelho
