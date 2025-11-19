@@ -1,10 +1,10 @@
 import React from 'react';
 import './PlayerProfile.css';
 
-import avatarVermelho from '../assets/avatarVermelho.png';
-import avatarVerde from '../assets/avatarVerde.png';
-import avatarAmarelo from '../assets/avatarAmarelo.png';
-import avatarAzul from '../assets/avatarAzul.png';
+import avatarVermelho from '../assets/avatarvermelho.png';
+import avatarVerde from '../assets/avatarverde.png';
+import avatarAmarelo from '../assets/avataramarelo.png';
+import avatarAzul from '../assets/avatarazul.png';
 
 interface PlayerProfileProps {
   color: 'red' | 'green' | 'yellow' | 'blue';
