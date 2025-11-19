@@ -8,10 +8,12 @@ Este projeto é uma implementação do jogo de tabuleiro Ludo usando React e Typ
 - Movimentação de peões com regras reais
 - Reinício de jogo e verificação de vitória.
 
+## Domínio no Vercel
+https://jogo-ludo.vercel.app/
+
 ## Como executar
 ```bash
 npm install
 npm run dev
 
-## Domínio no Vercel
-https://jogo-ludo.vercel.app/
+
