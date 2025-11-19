@@ -22,3 +22,8 @@ dist-ssr
 *.njsproj
 *.sln
 *.sw?
+
+# evitar versões de arquivos gerados
+dist/
+node_modules/
+src/**/*.js
